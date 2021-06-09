@@ -5,4 +5,5 @@
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
   "python.pythonPath": "/Users/iancossentino/Development/code/daily_circ/env/bin/python3",
+  "emmet.showSuggestionsAsSnippets": true,
 }

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils.timezone import datetime
+from .services.scraper import Scraper
 
 # Create your views here.
 
@@ -20,3 +21,9 @@ def hello_there(request, name):
       'date': datetime.now()
     }
   )
+
+
+def wapo(request):
+  s = Scraper()
+  s.wapo()
+  return
