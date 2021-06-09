@@ -1,9 +1,8 @@
 {
-  "django.i18n": false,
   "emmet.includeLanguages": {
     "django-html": "html",
   },
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.pythonPath": "/Users/iancossentino/Development/code/daily_circ/env/lib/python3.8/site-packages"
+  "python.pythonPath": "/Users/iancossentino/Development/code/daily_circ/env/bin/python3",
 }
