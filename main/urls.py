@@ -8,5 +8,5 @@ app_name = 'main'
 urlpatterns = [
   path('', home_view, name="home"),
   path('hello/<name>', hello_there, name="hello"),
-  path('wapo', wapo)
+  path('wapo', wapo, name="wapo")
 ]
