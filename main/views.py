@@ -23,9 +23,9 @@ def hello_there(request, name):
   )
 
 
-def wapo(request):
-  s = Scraper('https://www.washingtonpost.com')
-  articles = s.wapo()
+def new_yorker(request):
+  s = Scraper('https://www.newyorker.com')
+  articles = s.new_yorker()
   return render(
     request,
     'main/news.html',

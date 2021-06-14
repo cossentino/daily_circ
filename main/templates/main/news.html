@@ -1,7 +1,9 @@
 {% extends "main/layout.html" %}
 {% block title %}
-Daily Circular
+  Daily Circular
 {% endblock %}
 {% block content %}
-{{ articles }}
+  {% for a in articles %}
+    <p>{{ a }}</p>
+  {% endfor %}
 {% endblock %}
