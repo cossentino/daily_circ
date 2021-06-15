@@ -1,10 +1,19 @@
+.headlines-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .headline-card {
   display: flex;
   flex-direction: column;
-  border: chocolate;
   background-color: blue;
-  color: aqua;
+  grid-column: span 1 / span 1;
 }
+
+
 .message {
   font-weight: 600;
   color: blue;
