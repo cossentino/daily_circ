@@ -9,7 +9,5 @@
   {% for a in reuters %}
     <p>{{ a }}</p>
   {% endfor %} {% endcomment %}
-  <strong>{{ random_1 }}</strong>
-  <strong>{{ random_2 }}</strong>
-  {% include "main/little_guy.html" %}
+  {% include "main/little_guy.html" with nyer=random_nyer reuters=random_reuters %}
 {% endblock %}
