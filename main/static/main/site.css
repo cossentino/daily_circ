@@ -1,3 +1,10 @@
+.headline-card {
+  display: flex;
+  flex-direction: column;
+  border: chocolate;
+  background-color: blue;
+  color: aqua;
+}
 .message {
   font-weight: 600;
   color: blue;

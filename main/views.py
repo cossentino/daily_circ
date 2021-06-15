@@ -13,9 +13,10 @@ def news_view(request):
   request,
   'main/news.html',
   {
-    'nyer': nyer.new_yorker(),
-    'reuters': reuters.reuters(),
-    'random': nyer.random_choice()
+    # 'nyer': nyer.new_yorker(),
+    # 'reuters': reuters.reuters(),
+    'random_1': nyer.random_choice(),
+    'random_2': reuters.random_choice()
   })
 
 

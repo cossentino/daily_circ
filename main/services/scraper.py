@@ -13,15 +13,17 @@ class Scraper():
 
   def __init__(self, url):
     self.content = scrape_response(url)
-    self.results = None
+    if url == 'https://www.newyorker.com':
+      self.results = self.new_yorker()
+    elif url == 'https://www.reuters.com':
+      self.results = self.reuters()
 
 
   def new_yorker(self):
     tags = self.content.find_all(class_='summary-item__hed-link')
     links = [f"https://www.newyorker.com{h['href']}" for h in tags]
     headlines = [h.contents[0].contents[0] for h in tags]
-    self.results = list(zip(headlines, links))
-    return self.results
+    return list(zip(headlines, links))
 
   def reuters(self):
     tags = self.content(class_=['MediaStoryCard__basic_hero___fSAEnM', 'MediaStoryCard__no_meta___3iQjxw',
@@ -31,20 +33,11 @@ class Scraper():
     for h in tags:
       span = h.select_one('span.MediaStoryCard__title___2PHMeX')
       headlines.append(*span.contents)
-    self.results = list(zip(headlines, links))
-    return self.results
+    return list(zip(headlines, links))
 
   def get_results(self):
     return self.results
 
   def random_choice(self):
-    results = self.get_results()
-    return random.choice(results)
+    return random.choice(self.results)
 
-
-
-
-
-
-s = Scraper('https://www.reuters.com')
-s.reuters()
