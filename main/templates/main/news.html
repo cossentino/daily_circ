@@ -3,7 +3,11 @@
   Daily Circular
 {% endblock %}
 {% block content %}
-  {% for a in articles %}
+  {% for a in nyer %}
     <p>{{ a }}</p>
   {% endfor %}
+  {% for a in reuters %}
+    <p>{{ a }}</p>
+  {% endfor %}
+  <strong>{{ random }}</strong>
 {% endblock %}
