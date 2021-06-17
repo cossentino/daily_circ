@@ -7,16 +7,20 @@ from .services.scraper import Scraper
 
 
 def news_view(request):
-  nyer = Scraper('https://www.newyorker.com')
-  reuters = Scraper('https://www.reuters.com')
+  reuters_scraper = Scraper('https://www.reuters.com')
+  reuters_article = reuters_scraper.random_choice()
+  nyer_scraper = Scraper('https://www.newyorker.com')
+  nyer_article = nyer_scraper.random_choice()
   return render(
   request,
   'main/news.html',
   {
     # 'nyer': nyer.new_yorker(),
     # 'reuters': reuters.reuters(),
-    'random_nyer': nyer.random_choice(),
-    'random_reuters': reuters.random_choice()
+    'article_1_info': reuters_article[0],
+    'article_1_preview': reuters_article[1],
+    'article_2_info': nyer_article[0],
+    'article_2_preview': nyer_article[1]
   })
 
 

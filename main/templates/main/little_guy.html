@@ -1,11 +1,7 @@
 <div style="display:container; width: 100%; align-items: center;">
   <div class="headlines-container">
-    <div class="headline-card">
-      <a href={{ nyer.1 }}>{{ nyer.0 }}</a>
-    </div>
-    <div class="headline-card">
-      <a href={{ reuters.1 }}>{{ reuters.0 }}</a>
-    </div>
+    {% include "main/headlines/card.html" with article_info=article_1_info article_preview=article_1_preview %}
+    {% include "main/headlines/card.html" with article_info=article_2_info article_preview=article_2_preview %}
   </div>
 </div>
 
