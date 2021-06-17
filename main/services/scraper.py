@@ -35,6 +35,7 @@ class Scraper():
       headlines.append(*span.contents)
     return list(zip(headlines, links))
 
+
   def get_results(self):
     return self.results
 
