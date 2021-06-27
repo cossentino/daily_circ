@@ -1,5 +1,5 @@
 .headlines-container {
-  display: relative;
+  position: relative;
   gap: 1rem;
   border-style: solid;
   border-radius: 2rem;

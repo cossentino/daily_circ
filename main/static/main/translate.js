@@ -2,20 +2,26 @@
 // x and y are coordinates relative to the center of the circle. To test, center of circle is center of viewport
 
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 class Circle {
 
-  constructor(radius) {
+  constructor(radius, centerX = null, centerY = null) {
     this.radius = radius
+    this.centerX = centerX
+    this.centerY = centerY
+    this.objects = []
   }
 
   center() {
-    return [centerX, centerY]
+    return [this.centerX, this.centerY]
   }
-
 
   markCenter() {
     const container = document.getElementsByClassName('headlines-container')[0]
-    const centerArray = containerCenter()
+    const centerArray = this.center()
     const div2 = document.createElement('div')
     div2.style.width = '5px'
     div2.style.height = '5px'
@@ -24,11 +30,31 @@ class Circle {
     container.appendChild(div2)
   }
 
+
+  // Place DOM elements on circle at a given theta, using standard unit circle
+  // Ensure thetas and elements lists are same size; theta[i] corresponds to elements[i]
+  addElementsByTheta(thetas, elements) {
+    for (let i = 0; i < thetas.length; i += 1) {
+      const el = elements[i]
+      const theta = thetas[i]
+      el.style.transform = `translate(${this.center()[0] - elemCenter(el)[0] + this.radius * Math.cos(theta)}px, ${this.center()[1] - elemCenter(el)[1] - this.radius * Math.sin(theta)}px)`
+      this.objects.push([el, theta])
+    }
+  }
+
+  async changePosition() {
+    for (let theta=0; theta < 2 * Math.PI; theta += Math.PI / 360) {
+      for (let card of this.objects) {
+        const newY = this.center()[1] - this.radius * (Math.sin(theta + card[1])) - elemCenter(card[0])[1]
+        const newX = this.center()[0] + this.radius * (Math.cos(theta + card[1])) - elemCenter(card[0])[0]
+        card[0].style.transform = `translate(${newX}px, ${newY}px)`
+      }
+      await sleep(10)
+    }
+  }
+
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 
 function containerCenter() {
@@ -41,34 +67,18 @@ function elemCenter(el) {
   return [rect.width / 2, rect.height / 2]
 }
 
-function positionCardCenter() {
-  const card = document.getElementsByClassName('headline-card')[0]
-  const center = containerCenter()
-  const circ = new Circle(400)
-  card.style.transform = `translate(${center[0] + circ.radius - elemCenter(card)[0]}px, ${center[1] - elemCenter(card)[1]}px)`
-}
 
-
-async function changePosition() {
-  const circ = new Circle(400)
-  const card = document.getElementsByClassName('headline-card')[0]
-  for (let theta=0; theta < 2 * Math.PI; theta += Math.PI / 360) {
-    newY = containerCenter()[1] - circ.radius * (Math.sin(theta)) - elemCenter(card)[1]
-    newX = containerCenter()[0] + circ.radius * (Math.cos(theta)) - elemCenter(card)[0]
-    card.style.transform = `translate(${newX}px, ${newY}px)`
-    await sleep(10)
-  }
-}
 
 
 document.addEventListener('DOMContentLoaded', () => {
-  const circ = new Circle(400)
+  const container = document.getElementsByClassName('headlines-container')[0]
+  const containerCenter = elemCenter(container)
+  const circ = new Circle(400, containerCenter[0], containerCenter[1])
   circ.markCenter()
-  positionCardCenter()
-  const card = document.getElementsByClassName('headline-card')[0]
-  card.addEventListener('click', () => {
-    changePosition()
-})
+  const card1 = document.getElementsByClassName('headline-card')[0]
+  const card2 = document.getElementsByClassName('headline-card')[1]
+  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2], [card1, card2])
+  container.addEventListener('click', () => circ.changePosition())
 })
 
 
