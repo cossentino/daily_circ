@@ -13,6 +13,7 @@ class Circle {
     this.centerX = centerX
     this.centerY = centerY
     this.objects = []
+    this.rotate = false
   }
 
   center() {
@@ -43,23 +44,18 @@ class Circle {
   }
 
   async changePosition() {
-    for (let theta=0; theta < 2 * Math.PI; theta += Math.PI / 360) {
+    let theta = 0
+    while (this.rotate === true) {
       for (let card of this.objects) {
         const newY = this.center()[1] - this.radius * (Math.sin(theta + card[1])) - elemCenter(card[0])[1]
         const newX = this.center()[0] + this.radius * (Math.cos(theta + card[1])) - elemCenter(card[0])[0]
         card[0].style.transform = `translate(${newX}px, ${newY}px)`
       }
+      theta += Math.PI / 360
       await sleep(10)
     }
   }
 
-}
-
-
-
-function containerCenter() {
-  const myDiv = document.getElementsByClassName('headlines-container')[0]
-  return elemCenter(myDiv)
 }
 
 function elemCenter(el) {
@@ -67,18 +63,21 @@ function elemCenter(el) {
   return [rect.width / 2, rect.height / 2]
 }
 
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementsByClassName('headlines-container')[0]
   const containerCenter = elemCenter(container)
   const circ = new Circle(400, containerCenter[0], containerCenter[1])
   circ.markCenter()
-  const card1 = document.getElementsByClassName('headline-card')[0]
-  const card2 = document.getElementsByClassName('headline-card')[1]
-  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2], [card1, card2])
+  const cards = document.getElementsByClassName('headline-card')
+  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2], cards)
   container.addEventListener('click', () => circ.changePosition())
+  document.getElementById('start').addEventListener('click', () => {
+    circ.rotate = true
+  })
+  document.getElementById('stop').addEventListener('click', () => {
+    circ.rotate = false
+    // store current thetas here
+  })
 })
 
 
