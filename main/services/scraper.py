@@ -48,11 +48,14 @@ class Scraper():
     return pp_1.contents[0]
 
   def get_new_yorker_article_preview(self, url):
-    article_soup = self.scrape_response(url)
-    if not article_soup:
-      return None
-    pp_1 = article_soup.find(class_="article__body").p
-    return pp_1.contents[0]
+      article_soup = self.scrape_response(url)
+      if not article_soup:
+        return None
+      pp_1 = article_soup.find(class_='article__body')
+      if pp_1 and pp_1.p:
+        return pp_1.p.contents[0]
+      else:
+        return "Preview unavailable for this article"
 
 
   def get_results(self):
@@ -65,7 +68,7 @@ class Scraper():
         article_preview = self.get_reuters_article_preview(article_info[1])          
       elif self.site_name.lower() == 'new yorker':
         article_preview = self.get_new_yorker_article_preview(article_info[1])
-      if article_preview:
+      if article_preview and article_preview[0].isalpha():
         break
     return [article_info, article_preview]
 

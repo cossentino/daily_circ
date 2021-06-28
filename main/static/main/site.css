@@ -38,11 +38,11 @@
   position: absolute;
   flex-direction: column;
   background-color: #694000;
-  padding: 2rem;
-  margin: 1rem 1rem;
-  width: 17rem;
-  height: 17rem;
-  border-radius: 2rem;
+  padding: 2em;
+  margin: 2em 2em;
+  width: 15em;
+  height: 15em;
+  border-radius: 2em;
 }
 
 .article-title {
