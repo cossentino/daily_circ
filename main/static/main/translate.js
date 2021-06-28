@@ -44,18 +44,29 @@ class Circle {
     }
   }
 
-  async changePosition() {
+  async rotateStart() {
     let theta = 0
     const container = document.getElementsByClassName('headlines-container')[0]
+    const containerCenter = elemCenter(container)
     while (this.rotate === true) {
       for (let card of this.objects) {
-        const newY = elemCenter(container)[1] - this.radius * (Math.sin(theta + card[1])) - elemCenter(card[0])[1]
-        const newX = elemCenter(container)[0] + this.radius * (Math.cos(theta + card[1])) - elemCenter(card[0])[0]
+        const newY = containerCenter[1] - this.radius * (Math.sin(theta + card[1])) - elemCenter(card[0])[1]
+        const newX = containerCenter[0] + this.radius * (Math.cos(theta + card[1])) - elemCenter(card[0])[0]
         card[0].style.transform = `translate(${newX}em, ${newY}em)`
       }
       theta += Math.PI / 360
       await sleep(10)
     }
+  }
+
+  // p1 and p2 are 2-elem lists/tuples with x, y coords
+  getThetaFromZero(p1) {
+    return Math.atan(p1[1] / p1[0])
+  }
+
+  extractPointFromTransform(transformString) {
+    let re = /[^\.1-9](\d+)/g
+    let nums = [...transformString.matchAll(re, '$1')].map(n => parseInt(n[1]))
   }
 
 }
@@ -72,10 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
   circ.markCenter()
   const cards = document.getElementsByClassName('headline-card')
   circ.addElementsByTheta([Math.PI / 4, Math.PI / 2], cards)
-  container.addEventListener('click', () => circ.changePosition())
+
+
+
   document.getElementById('start').addEventListener('click', () => {
     circ.rotate = true
+    circ.rotateStart()
   })
+
+
+
   document.getElementById('stop').addEventListener('click', () => {
     circ.rotate = false
     // store current thetas here
