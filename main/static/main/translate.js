@@ -23,12 +23,15 @@ class Circle {
   markCenter() {
     const container = document.getElementsByClassName('headlines-container')[0]
     const div2 = document.createElement('div')
-    div2.style.width = '5px'
-    div2.style.height = '5px'
-    div2.style.backgroundColor = 'red'
-    div2.style.transform = `translate(${elemCenter(container)[0]}em, ${elemCenter(container)[1]}em)`
-    // div2.style.transform = `translate(${centerArray[0]}px, ${centerArray[1]}px)`
-    container.appendChild(div2)
+    const svg = document.getElementById('center')
+    svg.style.width = '15px'
+    svg.style.height = '15px'
+    svg.style.backgroundColor = 'red'
+    svg.style.display='inline'
+    // div2.style.backgroundColor = 'red'
+    // div2.style.transform = `translate(${elemCenter(container)[0]}em, ${elemCenter(container)[1]}em)`
+    svg.style.transform = `translate(${elemCenter(container)[0]}em, ${elemCenter(container)[1]}em)`
+    // container.appendChild(div2)
   }
 
 

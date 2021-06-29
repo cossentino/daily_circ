@@ -21,7 +21,7 @@ div.headline-card p {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #694000;
+  background-color: #93774a;
   padding: 1rem;
   margin: 1rem;
   width: 5%;
@@ -65,7 +65,7 @@ div.headline-card p {
   display: flex;
   position: absolute;
   flex-direction: column;
-  background-color: #694000;
+  background-color: #93774a;
   padding: 1.5em;
   margin: 2em 2em;
   width: 15em;
@@ -113,7 +113,6 @@ div.headline-card p {
 
 .body-content {
   display:flex;
-  background-color: #ededed;
   flex-direction: column;
   justify-content: center;
   align-items: center;
