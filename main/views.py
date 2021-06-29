@@ -9,12 +9,12 @@ from .services.scraper import Scraper
 def news_view(request):
   reuters_scraper = Scraper('https://www.reuters.com')
   reuters_article = reuters_scraper.random_choice()
-  if len(reuters_article[1]) > 300:
-    reuters_article[1] = reuters_article[1][:300]
+  if len(reuters_article[1]) > 500:
+    reuters_article[1] = reuters_article[1][:500]
   nyer_scraper = Scraper('https://www.newyorker.com')
   nyer_article = nyer_scraper.random_choice()
-  if len(nyer_article[1]) > 300:
-    nyer_article[1] = nyer_article[1][:300]
+  if len(nyer_article[1]) > 500:
+    nyer_article[1] = nyer_article[1][:500]
   return render(
   request,
   'main/news.html',

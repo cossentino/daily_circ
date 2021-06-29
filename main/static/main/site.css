@@ -9,6 +9,14 @@
   padding: 1em;
 }
 
+div.headline-card p {
+  position: relative;
+  text-overflow: ellipsis;
+  overflow:auto;
+  padding: 0%;
+  margin: .5em 0em;
+}
+
 .button {
   display: flex;
   justify-content: center;
@@ -44,7 +52,7 @@
 #news-page-title {
   padding: 0rem;
   color: #ababab;
-  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 5rem;
 }
 
@@ -58,7 +66,7 @@
   position: absolute;
   flex-direction: column;
   background-color: #694000;
-  padding: 2em;
+  padding: 1.5em;
   margin: 2em 2em;
   width: 15em;
   height: 15em;
@@ -68,9 +76,10 @@
 .article-title {
   color: black;
   text-decoration: none;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 1.25rem;
   font-weight: 400;
+  padding-bottom: .5em;
 }
 
 
