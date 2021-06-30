@@ -2,26 +2,35 @@ from bs4 import BeautifulSoup as BS, SoupStrainer as SS
 import requests
 import random
 import pdb
+import re
 
 
 class Scraper():
 
   def __init__(self, url):
-    self.content = self.scrape_response(url)
-    if url == 'https://www.newyorker.com':
-      self.results = self.get_new_yorker_headlines()
-      self.site_name="New Yorker"
-    elif url == 'https://www.reuters.com':
-      self.results = self.get_reuters_headlines()
-      self.site_name="Reuters"
+    self.content = None
+    self.results = None
+    self.site_name = None
+    self.dispatcher = {'reuters': self.reuters, 'newyorker': self.new_yorker, 'atlantic': self.atlantic, 'technologyreview': self.techreview }
 
   def scrape_response(self, url):
+      self.site_name = re.match(r"www\.(.+)\.", url).group(1)
       try:
         page = requests.get(url)
-        return BS(page.content, 'lxml')
+        self.contents = BS(page.content, 'lxml')
+        return self.contents
       except requests.ConnectionError as e:
         print(e)
         return None
+
+  def get_headlines(self):
+    tags = self.dispatcher[self.site_name]()
+
+
+
+
+
+
 
   def get_new_yorker_headlines(self):
     tags = self.content.find_all(class_='summary-item__hed-link')
@@ -34,6 +43,7 @@ class Scraper():
     'MediaStoryCard__hub___2ECKOi'])
     links = [f"https://www.reuters.com{h['href']}" for h in tags]
     headlines = []
+    pdb.set_trace()
     for h in tags:
       span = h.select_one('span.MediaStoryCard__title___2PHMeX')
       headlines.append(*span.contents)
