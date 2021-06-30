@@ -11,7 +11,7 @@ class Scraper():
     self.content = None
     self.results = None
     self.site_name = None
-    self.dispatcher = {'reuters': self.reuters, 'newyorker': self.new_yorker, 'atlantic': self.atlantic, 'technologyreview': self.techreview }
+ 
 
   def scrape_response(self, url):
       self.site_name = re.match(r"www\.(.+)\.", url).group(1)
@@ -24,7 +24,11 @@ class Scraper():
         return None
 
   def get_headlines(self):
-    tags = self.dispatcher[self.site_name]()
+    self.results = eval('self.site_name()')
+
+
+  def reuters(self):
+    pass
 
 
 
@@ -43,10 +47,10 @@ class Scraper():
     'MediaStoryCard__hub___2ECKOi'])
     links = [f"https://www.reuters.com{h['href']}" for h in tags]
     headlines = []
-    pdb.set_trace()
     for h in tags:
+      pdb.set_trace()
       span = h.select_one('span.MediaStoryCard__title___2PHMeX')
-      headlines.append(*span.contents)
+      headlines.append(span.string)
     return list(zip(headlines, links))
 
 
