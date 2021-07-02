@@ -5,28 +5,21 @@ from .services.scraper import Scraper
 
 # Create your views here.
 
+URLS = ['theatlantic']
 
-def news_view(request):
-  reuters_scraper = Scraper('https://www.reuters.com')
-  reuters_article = reuters_scraper.random_choice()
-  if len(reuters_article[1]) > 500:
-    reuters_article[1] = reuters_article[1][:500]
-  nyer_scraper = Scraper('https://www.newyorker.com')
-  nyer_article = nyer_scraper.random_choice()
-  if len(nyer_article[1]) > 500:
-    nyer_article[1] = nyer_article[1][:500]
+
+def news(request):
+  scrapers = []
+  for url in URLS:
+    sc = Scraper(f"https://www.{url}.com")
+    sc.scrape_response(sc.url)
+    sc.get_headlines()
+    sc.get_preview()
+    scrapers.append(sc)
   return render(
   request,
-  'main/news.html',
-  {
-    # 'nyer': nyer.new_yorker(),
-    # 'reuters': reuters.reuters(),
-    'article_1_info': reuters_article[0],
-    'article_1_preview': reuters_article[1],
-    'article_2_info': nyer_article[0],
-    'article_2_preview': nyer_article[1],
-    'article_1_sitename': reuters_scraper.site_name,
-    'article_2_sitename': nyer_scraper.site_name,
+  'main/news.html', {
+    'scrapers': scrapers
   })
 
 
