@@ -63,52 +63,35 @@ class Scraper():
     while True:
       selection = self.choose_random_article()
       text = eval(f"self.{self.site_name}_getpreview('{selection[1]}')")
-      if self.validate_preview(text):
+      if text[0].isalpha():
         self.selected_headline = selection[0]
         self.selected_preview = text
         break
 
+      # if self.validate_preview(text):
+      #   break
+
   def theatlantic_getpreview(self, article_url):
     content = self.scrape_response(article_url)
     paras = content.find_all(name="p", class_="ArticleParagraph_root__2QM08")
-    return " ".join([p.text for p in paras])
+    return "\n\n".join([p.text for p in paras])
+
+  def reuters_getpreview(self, article_url):
+    content = self.scrape_response(article_url)
+    paras = content.find_all(name="p", class_="ArticleBody__element___3UrnEs")
+    return "\n\n".join([p.text for p in paras])
+
+  def newyorker_getpreview(self, article_url):
+    content = self.scrape_response(article_url)
+    paras = content.find_all(name="p", class_="has-dropcap")
+    return "\n\n".join([p.text for p in paras])
 
   def validate_preview(self, text):
-    end_idx = max(len(text) - 1, 100)
+    end_idx = min(len(text) - 1, 100)
     if text:
       for char in text[0:end_idx]:
         if not (char.isalpha() or char.isspace()):
           return False
       return True
     return False
-
-
-
-  def get_reuters_article_preview(self, url):
-    article_soup = self.scrape_response(url)
-    if not article_soup:
-      return None
-    pp_1 = article_soup.find(class_='ArticleBody__content___2gQno2').p
-    return pp_1.contents[0]
-
-  def get_new_yorker_article_preview(self, url):
-      article_soup = self.scrape_response(url)
-      if not article_soup:
-        return None
-      pp_1 = article_soup.find(class_='article__body')
-      if pp_1 and pp_1.p:
-        return pp_1.p.contents[0]
-      else:
-        return "Preview unavailable for this article"
-
-  def random_choice(self):
-    while True:
-      article_info = random.choice(self.results)
-      if self.site_name.lower() == 'reuters':
-        article_preview = self.get_reuters_article_preview(article_info[1])          
-      elif self.site_name.lower() == 'new yorker':
-        article_preview = self.get_new_yorker_article_preview(article_info[1])
-      if article_preview and article_preview[0].isalpha():
-        break
-    return [article_info, article_preview]
 

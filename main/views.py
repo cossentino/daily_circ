@@ -5,7 +5,7 @@ from .services.scraper import Scraper
 
 # Create your views here.
 
-URLS = ['theatlantic']
+URLS = ['reuters', 'theatlantic', 'newyorker']
 
 
 def news(request):
