@@ -54,6 +54,17 @@ function elemCenter(el) {
   return [(rect.width / 2) / 16, (rect.height / 2) / 16]
 }
 
+function toggleCardMask() {
+  const masks = document.getElementsByClassName('card-mask')
+  for (mask of masks) {
+    if (!mask.style.display || mask.style.display === "none") {
+      mask.style.display = "flex"
+    } else {
+      mask.style.display = "none"
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementsByClassName('headlines-container')[0]
   const containerCenter = elemCenter(container)
@@ -62,27 +73,18 @@ document.addEventListener('DOMContentLoaded', () => {
   circ.addElementsByTheta([Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4], cards)
 
 
-
   document.getElementById('start').addEventListener('click', () => {
     circ.rotate = true
     circ.rotateStart()
+    toggleCardMask()
   })
 
   document.getElementById('stop').addEventListener('click', () => {
     circ.rotate = false
+    toggleCardMask()
     // store current thetas here
   })
 
-  document.getElementById('toggle-hide').addEventListener('click', () => {
-    const masks = document.getElementsByClassName('card-mask')
-    for (mask of masks) {
-      if (!mask.style.display || mask.style.display === "none") {
-        mask.style.display = "flex"
-      } else {
-        mask.style.display = "none"
-      }
-    }
-  })
 })
 
 

@@ -67,11 +67,8 @@ class Scraper():
       if text and text[0].isalpha():
         self.selected_headline = selection[0]
         self.selected_headline_link = selection[1]
-        self.selected_preview = text
+        self.selected_preview = text[0:min(len(text), 501)]
         break
-
-      # if self.validate_preview(text):
-      #   break
 
   def theatlantic_getpreview(self, article_url):
     content = self.scrape_response(article_url)
