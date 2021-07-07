@@ -20,21 +20,6 @@ class Circle {
     return [this.centerX, this.centerY]
   }
 
-  markCenter() {
-    const container = document.getElementsByClassName('headlines-container')[0]
-    const div2 = document.createElement('div')
-    const svg = document.getElementById('center')
-    svg.style.width = '15px'
-    svg.style.height = '15px'
-    svg.style.backgroundColor = 'red'
-    svg.style.display='inline'
-    // div2.style.backgroundColor = 'red'
-    // div2.style.transform = `translate(${elemCenter(container)[0]}em, ${elemCenter(container)[1]}em)`
-    svg.style.transform = `translate(${elemCenter(container)[0]}em, ${elemCenter(container)[1]}em)`
-    // container.appendChild(div2)
-  }
-
-
   // Place DOM elements on circle at a given theta, using standard unit circle
   // Ensure thetas and elements lists are same size; theta[i] corresponds to elements[i]
   addElementsByTheta(thetas, elements) {
@@ -62,16 +47,6 @@ class Circle {
     }
   }
 
-  // p1 and p2 are 2-elem lists/tuples with x, y coords
-  getThetaFromZero(p1) {
-    return Math.atan(p1[1] / p1[0])
-  }
-
-  extractPointFromTransform(transformString) {
-    let re = /[^\.1-9](\d+)/g
-    let nums = [...transformString.matchAll(re, '$1')].map(n => parseInt(n[1]))
-  }
-
 }
 
 function elemCenter(el) {
@@ -82,10 +57,9 @@ function elemCenter(el) {
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementsByClassName('headlines-container')[0]
   const containerCenter = elemCenter(container)
-  const circ = new Circle(30, containerCenter[0], containerCenter[1])
-  circ.markCenter()
+  const circ = new Circle(25, containerCenter[0], containerCenter[1])
   const cards = document.getElementsByClassName('headline-card')
-  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2], cards)
+  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4], cards)
 
 
 
@@ -94,11 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
     circ.rotateStart()
   })
 
-
-
   document.getElementById('stop').addEventListener('click', () => {
     circ.rotate = false
     // store current thetas here
+  })
+
+  document.getElementById('toggle-hide').addEventListener('click', () => {
+    const masks = document.getElementsByClassName('card-mask')
+    for (mask of masks) {
+      if (!mask.style.display || mask.style.display === "none") {
+        mask.style.display = "flex"
+      } else {
+        mask.style.display = "none"
+      }
+    }
   })
 })
 
