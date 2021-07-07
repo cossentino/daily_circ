@@ -5,13 +5,17 @@ import pdb
 import re
 
 
+
+"""Contains functionality to scrape headines from various news websites, and retrieve article
+preview information. Currently, supports Reuters, The New Yorker, and The Atlantic.
+"""
 class Scraper():
 
   def __init__(self, url):
     self.url = url
+    self.site_name = re.compile("www\.(.+)\.").search(url).group(1)
     self.content = None
     self.results = None
-    self.site_name = re.compile("www\.(.+)\.").search(url).group(1)
     self.selected_headline = None
     self.selected_headline_link = None
     self.selected_preview = None

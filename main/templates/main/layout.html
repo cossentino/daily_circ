@@ -5,10 +5,13 @@
     <title>{% block title %}{% endblock %}</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'main/site.css' %}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+SC&display=swap" rel="stylesheet"> 
     <script src="{% static 'main/translate.js' %}"></script>
 </head>
 
-<body style="background-color: #ededed;">
+<body style="background-color: #fff0d1;">
 {% comment %} <div class="navbar">
     <a href="{% url 'home' %}" class="navbar-brand">Home</a>
     <a href="{% url 'about' %}" class="navbar-item">About</a>

@@ -1,8 +1,7 @@
 .headlines-container {
   position: relative;
   gap: 1rem;
-  border-style: solid;
-  border-radius: 2rem;
+  border: 1rem solid #996600;
   width: 80%;
   height: 100rem;
   font-size: medium;
@@ -32,19 +31,27 @@ div.headline-card p {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #93774a;
+  background-color: #996600;
   padding: 1rem;
   margin: 1rem;
-  width: 5%;
+  width: 10%;
   height: 3%;
-  font-size: medium;
-  border-radius: 5%;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: large;
+  font-family:sans-serif;
+  font-weight: bold;
+  border: 0rem solid black;
+  border-radius: 20%;
 }
 
 #buttons-container {
   display: flex;
   justify-content: flex-end;
+}
+
+#information {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: larger;
+  color: #996600
 }
 
 .card-mask {
@@ -54,17 +61,18 @@ div.headline-card p {
   justify-content: center;
   align-items: center;
   font-size: 5em;
+  font-family: 'Encode Sans SC', sans-serif;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: blueviolet;
+  background-color: #332200;
   border-radius: 2em;
 }
 
 #news-page-title-container {
   display: block;
-  border: 5px solid black;
+  border: 5px dashed #996600;
   border-radius: 50%;
   text-align: center;
   padding-top: 1rem;
@@ -77,18 +85,10 @@ div.headline-card p {
 
 #news-page-title {
   padding: 0rem;
-  color: #ababab;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #996600;
+  font-family: 'Encode Sans SC', sans-serif;
   font-size: 5rem;
 }
-
-/* #center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  transform: translate(0, -50%);
-  background-color: black;
-} */
 
 .card-wrapper {
   position: relative;
@@ -99,7 +99,7 @@ div.headline-card p {
   display: flex;
   position: absolute;
   flex-direction: column;
-  background-color: #93774a;
+  background-color: #996600;
   padding: 1.5em;
   margin: 2em 2em;
   width: 15em;
@@ -125,7 +125,7 @@ div.headline-card p {
 .navbar {
   background-color: lightslategray;
   font-size: 1em;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Encode Sans SC', sans-serif;
   color: white;
   padding: 8px 5px 8px 5px;
 }
