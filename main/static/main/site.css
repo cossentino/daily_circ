@@ -9,12 +9,27 @@
   padding: 1em;
 }
 
+.headline-card-hidden {
+  color: transparent !important;
+}
+
+div.headline-card a {
+  color: black;
+}
+
+
 div.headline-card p {
   position: relative;
   text-overflow: ellipsis;
   overflow:auto;
   padding: 0%;
   margin: .5em 0em;
+}
+
+.headline-card-title {
+  margin: auto;
+  font-size: large;
+  font-weight: bold;
 }
 
 .button {

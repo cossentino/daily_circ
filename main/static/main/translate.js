@@ -82,10 +82,10 @@ function elemCenter(el) {
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementsByClassName('headlines-container')[0]
   const containerCenter = elemCenter(container)
-  const circ = new Circle(30, containerCenter[0], containerCenter[1])
+  const circ = new Circle(25, containerCenter[0], containerCenter[1])
   circ.markCenter()
   const cards = document.getElementsByClassName('headline-card')
-  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2], cards)
+  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4], cards)
 
 
 

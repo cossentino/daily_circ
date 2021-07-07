@@ -13,6 +13,7 @@ class Scraper():
     self.results = None
     self.site_name = re.compile("www\.(.+)\.").search(url).group(1)
     self.selected_headline = None
+    self.selected_headline_link = None
     self.selected_preview = None
  
 
@@ -63,8 +64,9 @@ class Scraper():
     while True:
       selection = self.choose_random_article()
       text = eval(f"self.{self.site_name}_getpreview('{selection[1]}')")
-      if text[0].isalpha():
+      if text and text[0].isalpha():
         self.selected_headline = selection[0]
+        self.selected_headline_link = selection[1]
         self.selected_preview = text
         break
 
@@ -83,8 +85,11 @@ class Scraper():
 
   def newyorker_getpreview(self, article_url):
     content = self.scrape_response(article_url)
-    paras = content.find_all(name="p", class_="has-dropcap")
-    return "\n\n".join([p.text for p in paras])
+    if content:
+      paras = content.find_all(name="p", class_="has-dropcap")
+      return "\n\n".join([p.text for p in paras])
+    else:
+      return None
 
   def validate_preview(self, text):
     end_idx = min(len(text) - 1, 100)
