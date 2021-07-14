@@ -16,6 +16,15 @@
   color: #996600
 }
 
+#circle {
+  position: absolute;
+  z-index: -1;
+  top: 250px;
+  left: 250px;
+  width: 350px;
+  height: 350px;  
+}
+
 
 
 /* Headline cards */
