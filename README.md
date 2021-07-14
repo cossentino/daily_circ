@@ -1,6 +1,6 @@
 ## The Daily Circular (Django/Python, JavaScript, Vanilla CSS)<br><br>
 
-<div align="center">![Demo gif](/media/daily-circ-demo.gif)</div><br><br>
+![Demo gif](/media/daily-circ-demo.gif)<br><br>
 
 **Description:** Single-page web application with randomized, physically-rotating circle of news articles pulled from varied sources, allowing the user to discover new topics they may not otherwise look at. 
 
