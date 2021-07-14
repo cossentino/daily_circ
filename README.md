@@ -11,5 +11,5 @@
 **Technical Notes**
 
 * Custom circle module controls circular movement of headline cards using basic trigonometry and the CSS "transform" property
-* Custom Scraper class houses methods common to all web scraping tasks, while also housing unique methods tailored to each news site
-* All CSS created without aid of frameworks
+* Scraper class houses flexible web-scraping methods designed to minimize hard-coding site-specific scraping methods
+* From-scratch CSS classes
