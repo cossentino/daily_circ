@@ -33,23 +33,6 @@ function toggleCardMask(circ, start=true) {
   }
 }
 
-
-  // const masks = document.getElementsByClassName('card-mask')
-  // for (mask of masks) {
-  //   if (start === true) {
-  //     mask.style.display = "flex"
-  //     el.style.zIndex = 0
-  //   }
-  // }
-  // if (start === false) {
-  //   const el = circ.getTopmostElement()
-  //   const mask = el.querySelector('div.card-mask')
-  //   mask.style.display = "none"
-  //   el.style.zIndex = 1
-  // }
-
-
-
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
