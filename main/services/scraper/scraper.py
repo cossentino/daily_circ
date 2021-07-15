@@ -4,8 +4,6 @@ import random
 import pdb
 import re
 
-
-
 """Contains functionality to scrape headines from various news websites, and retrieve article
 preview information. Currently, supports Reuters, The New Yorker, and The Atlantic.
 """
@@ -25,8 +23,8 @@ class Scraper():
         page = requests.get(url)
         self.content = BS(page.content, 'lxml')
         return self.content
-      except requests.ConnectionError as e:
-        print(e)
+      except:
+        print('ERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR')
         return None
 
   def get_headlines(self):
@@ -64,11 +62,14 @@ class Scraper():
     return random.choice(self.results) if self.results else None
 
   def get_preview(self, *args, **kwargs):
+    text, content, selection, paras = None, None, None, None
     while True:
       selection = self.choose_random_article()
       content = self.scrape_response(selection[1])
-      paras = content.find_all(**kwargs)
-      text = "\n\n".join([p.text for p in paras])
+      if content:
+        paras = content.find_all(**kwargs)
+      if paras:
+        text = "\n\n".join([p.text for p in paras])
       if text and text[0].isalpha():
         self.selected_articles.append([selection[0], selection[1], text[0:min(len(text), 501)]])
         break

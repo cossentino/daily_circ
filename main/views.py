@@ -16,7 +16,7 @@ def news(request):
     sc = Scraper(f"https://www.{url}.com")
     sc.scrape_response(sc.url)
     sc.get_headlines()
-    for _ in range(1):
+    for _ in range(4):
       sc.get_preview(eval(f"attributes.{sc.site_name.upper()}"))
     scrapers.append(sc)
   return render(
