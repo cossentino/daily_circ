@@ -2,9 +2,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementsByClassName('headlines-container')[0]
   const containerCenter = elemCenter(container)
-  const circ = new Circle(25, containerCenter[0], containerCenter[1])
+  const circ = new Circle(15, containerCenter[0], containerCenter[1])
   const cards = document.getElementsByClassName('headline-card')
-  debugger
   circ.add(cards)
 
 

@@ -13,7 +13,8 @@
 #information {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: larger;
-  color: #996600
+  color: #996600;
+  display: inline;
 }
 
 #circle {
@@ -95,8 +96,8 @@ div.headline-card p {
   background-color: #996600;
   padding: 1rem;
   margin: 1rem;
-  width: 10%;
-  height: 3%;
+  width: 5em;
+  height: 3em;
   font-size: large;
   font-family:sans-serif;
   font-weight: bold;

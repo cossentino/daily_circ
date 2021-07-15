@@ -16,9 +16,8 @@ class Scraper():
     self.site_name = re.compile("www\.(.+)\.").search(url).group(1)
     self.content = None
     self.results = None
-    self.selected_headlines = []
-    self.selected_headline_links = []
-    self.selected_previews = []
+    # selected_articles property elements structured [headline, link, preview text]
+    self.selected_articles = []
  
 
   def scrape_response(self, url):
@@ -71,9 +70,7 @@ class Scraper():
       paras = content.find_all(**kwargs)
       text = "\n\n".join([p.text for p in paras])
       if text and text[0].isalpha():
-        self.selected_headlines.append([selection[0], selection[1], text[0:min(len(text), 501)]])
-        # self.selected_headline_links.append(selection[1])
-        # self.selected_previews.append(text[0:min(len(text), 501)])
+        self.selected_articles.append([selection[0], selection[1], text[0:min(len(text), 501)]])
         break
 
   def validate_preview(self, text):
