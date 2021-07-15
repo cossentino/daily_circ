@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils.timezone import datetime
-from .services.scraper import Scraper
+from .services.scraper.scraper import Scraper
+from .services.scraper import attributes
+
 
 # Create your views here.
 
-URLS = ['reuters', 'theatlantic', 'newyorker']
+URLS = ['reuters', 'newyorker']
 
 
 def news(request):
@@ -14,7 +16,7 @@ def news(request):
     sc = Scraper(f"https://www.{url}.com")
     sc.scrape_response(sc.url)
     sc.get_headlines()
-    sc.get_preview()
+    sc.get_preview(eval(f"attributes.{sc.site_name.upper()}"))
     scrapers.append(sc)
   return render(
   request,

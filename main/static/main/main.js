@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const containerCenter = elemCenter(container)
   const circ = new Circle(25, containerCenter[0], containerCenter[1])
   const cards = document.getElementsByClassName('headline-card')
-  circ.addElementsByTheta([Math.PI / 4, Math.PI / 2, 3 * Math.PI / 4], cards)
+  debugger
+  circ.add(cards)
 
 
   document.getElementById('start').addEventListener('click', () => {
@@ -61,11 +62,11 @@ class Circle {
 
   // Place DOM elements on circle at a given theta, using standard unit circle
   // Ensure thetas and elements lists are same size; theta[i] corresponds to elements[i]
-  addElementsByTheta(thetas, elements) {
+  add(elements) {
     const container = document.getElementsByClassName('headlines-container')[0]
-    for (let i = 0; i < thetas.length; i += 1) {
+    for (let i = 0; i < elements.length; i += 1) {
       const el = elements[i]
-      const theta = thetas[i]
+      const theta = (2 * Math.PI / elements.length) * i
       el.style.transform = `translate(${elemCenter(container)[0] - elemCenter(el)[0] + this.radius * Math.cos(theta)}em, ${elemCenter(container)[1] - elemCenter(el)[1] - this.radius * Math.sin(theta)}em)`
       this.objects.push([el, theta])
     }

@@ -16,9 +16,9 @@ class Scraper():
     self.site_name = re.compile("www\.(.+)\.").search(url).group(1)
     self.content = None
     self.results = None
-    self.selected_headline = None
-    self.selected_headline_link = None
-    self.selected_preview = None
+    self.selected_headlines = []
+    self.selected_headline_links = []
+    self.selected_previews = []
  
 
   def scrape_response(self, url):
@@ -64,33 +64,17 @@ class Scraper():
   def choose_random_article(self):
     return random.choice(self.results) if self.results else None
 
-  def get_preview(self):
+  def get_preview(self, *args, **kwargs):
     while True:
       selection = self.choose_random_article()
-      text = eval(f"self.{self.site_name}_getpreview('{selection[1]}')")
+      content = self.scrape_response(selection[1])
+      paras = content.find_all(**kwargs)
+      text = "\n\n".join([p.text for p in paras])
       if text and text[0].isalpha():
-        self.selected_headline = selection[0]
-        self.selected_headline_link = selection[1]
-        self.selected_preview = text[0:min(len(text), 501)]
+        self.selected_headlines.append([selection[0], selection[1], text[0:min(len(text), 501)]])
+        # self.selected_headline_links.append(selection[1])
+        # self.selected_previews.append(text[0:min(len(text), 501)])
         break
-
-  def theatlantic_getpreview(self, article_url):
-    content = self.scrape_response(article_url)
-    paras = content.find_all(name="p", class_="ArticleParagraph_root__2QM08")
-    return "\n\n".join([p.text for p in paras])
-
-  def reuters_getpreview(self, article_url):
-    content = self.scrape_response(article_url)
-    paras = content.find_all(name="p", class_="ArticleBody__element___3UrnEs")
-    return "\n\n".join([p.text for p in paras])
-
-  def newyorker_getpreview(self, article_url):
-    content = self.scrape_response(article_url)
-    if content:
-      paras = content.find_all(name="p", class_="has-dropcap")
-      return "\n\n".join([p.text for p in paras])
-    else:
-      return None
 
   def validate_preview(self, text):
     end_idx = min(len(text) - 1, 100)
@@ -100,4 +84,7 @@ class Scraper():
           return False
       return True
     return False
+
+  def formatted_site_title(self):
+    return self.content.find("title").text
 

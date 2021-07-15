@@ -5,6 +5,8 @@
     <button class="button" id="stop">Stop</button>
   </div>
   {% for sc in scrapers %}
-    {% include "main/headlines/card.html" with sc=sc %}
+    {% for art in sc.selected_headlines %}
+      {% include "main/headlines/card.html" with sc=sc head=art.0 link=art.1 body=art.2 %}
+    {% endfor %}
   {% endfor %}
 </div>

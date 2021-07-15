@@ -4,8 +4,8 @@
   position: relative;
   gap: 1rem;
   border: 1rem solid #996600;
-  width: 80%;
-  height: 100rem;
+  width: 80vw;
+  height: 90vh;
   font-size: medium;
   padding: 1em;
 }
