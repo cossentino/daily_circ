@@ -21,19 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function toggleCardMask(circ, start=true) {
-  const masks = document.getElementsByClassName('card-mask')
-  for (mask of masks) {
-    if (start === true) {
-      mask.style.display = "flex"
-    }
+  let el = document.getElementById('revealed-card')
+  if (!el) {
+    el = circ.getTopmostElement()
   }
-  if (start === false) {
-    const el = circ.getTopmostElement()
-    const mask = el.querySelector('div.card-mask')
-    mask.style.display = "none"
+  const mask = el.querySelector('div.card-mask')
+  if (start === true) {
+    el.id = ""
+  } else if (start === false) {
+    el.id = "revealed-card"
   }
-
 }
+
+
+  // const masks = document.getElementsByClassName('card-mask')
+  // for (mask of masks) {
+  //   if (start === true) {
+  //     mask.style.display = "flex"
+  //     el.style.zIndex = 0
+  //   }
+  // }
+  // if (start === false) {
+  //   const el = circ.getTopmostElement()
+  //   const mask = el.querySelector('div.card-mask')
+  //   mask.style.display = "none"
+  //   el.style.zIndex = 1
+  // }
+
 
 
 function sleep(ms) {

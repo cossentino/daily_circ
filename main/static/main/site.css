@@ -26,8 +26,6 @@
   height: 350px;  
 }
 
-
-
 /* Headline cards */
 
 div.headline-card a {
@@ -40,6 +38,14 @@ div.headline-card p {
   overflow:auto;
   padding: 0%;
   margin: .5em 0em;
+}
+
+#revealed-card {
+  z-index: 1;
+}
+
+#revealed-card .card-mask {
+  display: none;
 }
 
 .card-mask {
