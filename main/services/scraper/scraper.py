@@ -24,7 +24,7 @@ class Scraper():
         self.content = BS(page.content, 'lxml')
         return self.content
       except:
-        print('ERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR ERROR ERROR ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR')
+        print('ERROR')
         return None
 
   def get_headlines(self):
@@ -49,13 +49,13 @@ class Scraper():
     links = [tag['href'] for tag in tags if tag.string != None]
     return list(zip(headlines, links))
 
-  # On hold for now - scraping might not be possible
-  def technologyreview(self):
-    wrappers = self.content.find_all(['h2', 'h3'])
-    tags = [w.a for w in wrappers if w.a != None]
-    links = [tag['href'] for tag in tags]
-    headlines = [tag.string for tag in tags]
-    return list(zip(headlines, links))
+  # # On hold for now - scraping might not be possible
+  # def technologyreview(self):
+  #   wrappers = self.content.find_all(['h2', 'h3'])
+  #   tags = [w.a for w in wrappers if w.a != None]
+  #   links = [tag['href'] for tag in tags]
+  #   headlines = [tag.string for tag in tags]
+  #   return list(zip(headlines, links))
 
   # Returns tuple chosen at random from self.results
   def choose_random_article(self):
